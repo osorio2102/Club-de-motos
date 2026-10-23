@@ -1,0 +1,276 @@
+/* Estilos del club TOV's */
+
+/* Colores del club (si se cambia aqui, cambia en toda la pagina) */
+:root {
+    --carbon: #1b1916;        /* negro tipo cuero */
+    --carbon-claro: #2b2722;
+    --vino: #6e1a1a;          /* rojo vino */
+    --vino-oscuro: #4f1212;
+    --dorado: #b8935a;        /* dorado envejecido, como las hebillas */
+    --dorado-claro: #d6b98a;
+    --cuero: #5a3e2b;         /* cafe cuero */
+    --crema: #f1e9dc;
+    --pergamino: #faf6ef;
+    --texto: #2b2722;
+}
+
+body {
+    font-family: "Lato", Arial, sans-serif;
+    color: var(--texto);
+    background-color: var(--pergamino);
+    padding-top: 56px; /* espacio para el menu fijo */
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+    font-family: "Playfair Display", Georgia, serif;
+}
+
+/* Colores de fondo y texto */
+.fondo-carbon { background-color: var(--carbon); }
+.fondo-crema { background-color: var(--crema); }
+.fondo-pergamino { background-color: var(--pergamino); }
+.fondo-vino { background-color: var(--vino); color: white; }
+.fondo-dorado { background-color: var(--dorado); color: var(--carbon); }
+.fondo-cuero { background-color: var(--cuero); color: white; }
+.text-dorado { color: var(--dorado) !important; }
+.texto-suave { color: var(--dorado-claro); }
+
+/* Botones */
+.btn-dorado {
+    background-color: var(--dorado);
+    border: 1px solid var(--dorado);
+    color: var(--carbon);
+    font-weight: bold;
+}
+
+.btn-dorado:hover {
+    background-color: var(--dorado-claro);
+    border-color: var(--dorado-claro);
+    color: var(--carbon);
+}
+
+.btn-vino {
+    background-color: var(--vino);
+    border: 1px solid var(--vino);
+    color: white;
+}
+
+.btn-vino:hover {
+    background-color: var(--vino-oscuro);
+    border-color: var(--vino-oscuro);
+    color: white;
+}
+
+.btn-borde-claro {
+    border: 1px solid var(--dorado-claro);
+    color: var(--dorado-claro);
+}
+
+.btn-borde-claro:hover {
+    background-color: var(--dorado-claro);
+    color: var(--carbon);
+}
+
+.btn-borde-oscuro {
+    border: 1px solid var(--carbon);
+    color: var(--carbon);
+}
+
+.btn-borde-oscuro:hover {
+    background-color: var(--carbon);
+    color: white;
+}
+
+/* Menu */
+.navbar-club {
+    background-color: var(--carbon);
+    border-bottom: 3px solid var(--vino);
+}
+
+.navbar-club .nav-link:hover {
+    color: var(--dorado-claro);
+}
+
+.logo {
+    border: 2px solid var(--dorado);
+    color: var(--dorado);
+    padding: 0 8px;
+    border-radius: 4px;
+    letter-spacing: 2px;
+}
+
+/* Paginas internas: un poco de alto minimo para que el pie no quede arriba */
+.seccion-pagina {
+    min-height: calc(100vh - 120px);
+}
+
+/* Inicio */
+.seccion-inicio {
+    background: linear-gradient(rgba(27, 25, 22, 0.8), rgba(79, 18, 18, 0.6)),
+        url("https://images.unsplash.com/photo-1558980664-10e7170b5df9?auto=format&fit=crop&w=1400&q=80");
+    background-size: cover;
+    background-position: center;
+    padding: 90px 0;
+}
+
+.seccion-inicio .btn {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.tarjeta-numero {
+    background-color: rgba(27, 25, 22, 0.6);
+    border: 1px solid var(--dorado);
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+}
+
+.tarjeta-numero strong {
+    display: block;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.8rem;
+    color: var(--dorado);
+}
+
+.tarjeta-beneficios {
+    background-color: var(--pergamino);
+    border-top: 5px solid var(--vino);
+    border-radius: 6px;
+    padding: 25px;
+}
+
+.tarjeta-beneficios li {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--dorado-claro);
+}
+
+/* Titulos de las secciones */
+.etiqueta {
+    color: var(--dorado);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+/* Nosotros */
+.tarjeta-info {
+    background-color: white;
+    border: 1px solid var(--crema);
+    border-bottom: 4px solid var(--dorado);
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+}
+
+.icono {
+    font-size: 2.5rem;
+}
+
+.tarjeta-cita {
+    background-color: var(--carbon);
+    color: var(--crema);
+    border-left: 6px solid var(--vino);
+    border-radius: 6px;
+    padding: 25px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+}
+
+.tarjeta-cita span {
+    color: var(--dorado);
+}
+
+/* Eventos */
+.tarjeta-evento {
+    border: 1px solid var(--dorado-claro);
+    background-color: var(--pergamino);
+}
+
+.tarjeta-evento:hover {
+    border-color: var(--vino);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Galeria */
+.foto-galeria {
+    border-radius: 6px;
+    border: 3px solid var(--carbon);
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Formulario */
+.formulario {
+    background-color: var(--carbon-claro);
+    border: 1px solid var(--cuero);
+    border-radius: 6px;
+    padding: 25px;
+}
+
+.formulario .form-control:focus,
+.formulario .form-select:focus {
+    border-color: var(--dorado);
+    box-shadow: 0 0 0 0.2rem rgba(184, 147, 90, 0.35);
+}
+
+.opcion-plan {
+    background-color: var(--cuero);
+    border-radius: 4px;
+    padding: 8px 8px 8px 32px;
+}
+
+.form-check-input:checked {
+    background-color: var(--vino);
+    border-color: var(--dorado);
+}
+
+.input-validation-error {
+    border: 2px solid var(--dorado);
+}
+
+.tabla-precios {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--crema);
+    border: 1px solid var(--dorado);
+}
+
+.tabla-precios th {
+    color: var(--dorado);
+}
+
+.alerta-club {
+    background-color: var(--crema);
+    border-left: 5px solid var(--vino);
+    color: var(--carbon);
+}
+
+/* Tabla de miembros */
+.encabezado-tabla th {
+    background-color: var(--carbon);
+    color: var(--dorado);
+}
+
+/* Confirmacion */
+.tarjeta-confirmacion {
+    max-width: 600px;
+    border: 1px solid var(--dorado);
+}
+
+.item-destacado {
+    background-color: var(--crema);
+    border-left: 5px solid var(--dorado);
+}
+
+/* Pie de pagina */
+.pie-pagina {
+    background-color: var(--carbon);
+    border-top: 3px solid var(--dorado);
+    color: var(--crema);
+    padding: 20px 0;
+}

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TOV's Club</title>
+    <!-- Letras: Playfair Display para titulos y Lato para el texto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Menu (se repite en todas las paginas) -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-club fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                <span class="logo">TOV</span> Club de Motociclismo
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="nosotros">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="eventos">Eventos</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="galeria">Galería</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Miembros" asp-action="Index">Miembros</a></li>
+                    <li class="nav-item"><a class="nav-link text-dorado fw-semibold" asp-controller="Miembros" asp-action="Inscripcion">Inscripción</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="container d-flex justify-content-between flex-wrap gap-2">
+            <p class="mb-0">© 2026 TOV's Club de Motociclismo</p>
+            <a href="#" class="text-white text-decoration-none">Volver arriba ↑</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

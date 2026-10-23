@@ -1,0 +1,121 @@
+@model Miembro
+@{
+    ViewData["Title"] = "Inscripción";
+    var planes = (Dictionary<string, decimal>)ViewBag.Planes;
+    var tiposMoto = (List<string>)ViewBag.TiposMoto;
+}
+
+<section class="py-5 fondo-carbon text-white seccion-pagina">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <p class="etiqueta">Inscripción</p>
+                <h2>Haz parte del movimiento rider</h2>
+                <p class="lead">Regístrate y empieza a vivir experiencias únicas con nuestra comunidad.</p>
+
+                <!-- Tabla de precios (sale del diccionario Planes en C#) -->
+                <table class="table tabla-precios mt-3">
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Cuota mensual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var plan in planes)
+                        {
+                            <tr>
+                                <td>@plan.Key</td>
+                                <td>$@plan.Value.ToString("N0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <p class="small texto-suave">* Motos de más de 600 cc pagan $10.000 adicionales.</p>
+
+                <div class="alert alerta-club" id="info-cuota">
+                    Selecciona un plan y presiona "Calcular cuota".
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <!-- El formulario se envia por POST a MiembrosController.Inscripcion -->
+                <form asp-controller="Miembros" asp-action="Inscripcion" method="post" class="formulario" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Nombre" class="form-label"></label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ej: Carlos Ruiz" />
+                            <span asp-validation-for="Nombre" class="text-dorado small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Correo" class="form-label"></label>
+                            <input asp-for="Correo" class="form-control" placeholder="correo@ejemplo.com" />
+                            <span asp-validation-for="Correo" class="text-dorado small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Telefono" class="form-label"></label>
+                            <input asp-for="Telefono" class="form-control" placeholder="Ej: 3001234567" />
+                            <span asp-validation-for="Telefono" class="text-dorado small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Edad" class="form-label"></label>
+                            <input asp-for="Edad" class="form-control" />
+                            <span asp-validation-for="Edad" class="text-dorado small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="FechaIngreso" class="form-label"></label>
+                            <input asp-for="FechaIngreso" class="form-control" />
+                            <span asp-validation-for="FechaIngreso" class="text-dorado small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="TipoMoto" class="form-label"></label>
+                            <select asp-for="TipoMoto" class="form-select">
+                                <option value="">Selecciona</option>
+                                @foreach (var tipo in tiposMoto)
+                                {
+                                    <option value="@tipo">@tipo</option>
+                                }
+                            </select>
+                            <span asp-validation-for="TipoMoto" class="text-dorado small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Cilindraje" class="form-label"></label>
+                            <input asp-for="Cilindraje" class="form-control" placeholder="Ej: 250" />
+                            <span asp-validation-for="Cilindraje" class="text-dorado small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Tipo de membresía</label>
+                            <div class="row g-2">
+                                @{ int i = 0; }
+                                @foreach (var plan in planes)
+                                {
+                                    i++;
+                                    <div class="col-md-4">
+                                        <div class="form-check opcion-plan">
+                                            <input asp-for="Plan" type="radio" class="form-check-input" id="plan@(i)"
+                                                   value="@plan.Key" data-precio="@plan.Value" />
+                                            <label class="form-check-label" for="plan@(i)">@plan.Key</label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <span asp-validation-for="Plan" class="text-dorado small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="button" class="btn btn-dorado" id="calcular-cuota">Calcular cuota</button>
+                            <button type="submit" class="btn btn-vino">Registrar inscripción</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

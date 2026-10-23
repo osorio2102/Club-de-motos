@@ -1,0 +1,178 @@
+﻿@model List<Evento>
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!-- Inicio -->
+<section id="inicio" class="seccion-inicio">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7 text-white">
+                <p class="text-uppercase fw-semibold text-dorado">Comunidad rider</p>
+                <h1 class="display-5 fw-bold">La libertad de la carretera te espera.</h1>
+                <p class="lead">
+                    En TOV's Club compartimos la pasión por las motos, la aventura y
+                    la seguridad en cada recorrido.
+                </p>
+                <a asp-controller="Miembros" asp-action="Inscripcion" class="btn btn-dorado btn-lg">Únete ahora</a>
+                <a href="#eventos" class="btn btn-borde-claro btn-lg">Ver eventos</a>
+
+                <div class="row mt-4 g-3">
+                    <div class="col-4">
+                        <div class="tarjeta-numero">
+                            <strong>@ViewBag.TotalMiembros</strong>
+                            <span>Riders inscritos</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="tarjeta-numero">
+                            <strong>24</strong>
+                            <span>Rodadas al año</span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="tarjeta-numero">
+                            <strong>8</strong>
+                            <span>Ciudades</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="tarjeta-beneficios">
+                    <h3>¿Qué te ofrece el club?</h3>
+                    <ul class="list-unstyled">
+                        <li>✔ Rodadas grupales cada fin de semana</li>
+                        <li>✔ Talleres de mantenimiento básico</li>
+                        <li>✔ Eventos y viajes regionales</li>
+                        <li>✔ Comunidad con experiencia y apoyo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nosotros -->
+<section id="nosotros" class="py-5 fondo-pergamino">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p class="etiqueta">Sobre nosotros</p>
+            <h2>Más que un club, una familia sobre dos ruedas</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="tarjeta-info">
+                    <div class="icono">🛡️</div>
+                    <h4>Seguridad</h4>
+                    <p>Promovemos una conducción responsable en cada ruta.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="tarjeta-info">
+                    <div class="icono">🤝</div>
+                    <h4>Compañerismo</h4>
+                    <p>Compartimos experiencias, apoyo y amistad en cada aventura.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="tarjeta-info">
+                    <div class="icono">🏍️</div>
+                    <h4>Pasión</h4>
+                    <p>Amamos la moto, la ruta y el paisaje que la acompaña.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="tarjeta-info">
+                    <div class="icono">🧰</div>
+                    <h4>Experiencia</h4>
+                    <p>Los riders con más tiempo ayudan a los nuevos a mejorar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 g-4 align-items-center">
+            <div class="col-lg-6">
+                <h3>¿Cómo unirte?</h3>
+                <ol>
+                    <li>Llena el formulario de inscripción.</li>
+                    <li>Asiste a la reunión de bienvenida del club.</li>
+                    <li>Participa en tu primera rodada grupal.</li>
+                </ol>
+            </div>
+            <div class="col-lg-6">
+                <div class="tarjeta-cita">
+                    <p>"Cada ruta se disfruta más cuando se comparte con quienes viven la misma pasión."</p>
+                    <span>— TOV's Club</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Eventos (vienen del controlador) -->
+<section id="eventos" class="py-5 fondo-crema">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p class="etiqueta">Agenda</p>
+            <h2>Próximos eventos</h2>
+        </div>
+
+        @if (Model.Count == 0)
+        {
+            <p class="text-center">Por ahora no hay eventos programados.</p>
+        }
+
+        <div class="row g-4">
+            @foreach (var evento in Model)
+            {
+                string color = evento.Tipo == "Rodada" ? "fondo-vino"
+                             : evento.Tipo == "Taller" ? "fondo-dorado"
+                             : "fondo-cuero";
+
+                <div class="col-md-4">
+                    <div class="card h-100 tarjeta-evento">
+                        <div class="card-body">
+                            <span class="badge @color">@evento.Tipo</span>
+                            <h5 class="card-title mt-2">@evento.Titulo</h5>
+                            <p class="card-text">@evento.Descripcion</p>
+                            <p class="mb-1"><strong>Fecha:</strong> @evento.Fecha.ToString("dd/MM/yyyy")</p>
+                            <p class="mb-0"><strong>Lugar:</strong> @evento.Lugar</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Galeria -->
+<section id="galeria" class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p class="etiqueta">Galería</p>
+            <h2>Momentos que nos hacen seguir rodando</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <img src="https://topmotors.pe/wp-content/uploads/2023/10/Parallax_CB1000R-1024x683.jpg" alt="Moto naked" class="img-fluid foto-galeria">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <img src="https://images.unsplash.com/photo-1558980664-10e7170b5df9?auto=format&fit=crop&w=900&q=80" alt="Moto en carretera" class="img-fluid foto-galeria">
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <img src="https://www.galgo.com/wp-content/uploads/2023/10/motos-de-alto-cilindraje-honda-africa-twin.jpg" alt="Moto de alto cilindraje" class="img-fluid foto-galeria">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Invitacion a inscribirse -->
+<section class="py-5 fondo-carbon text-white text-center">
+    <div class="container">
+        <h2>¿Listo para rodar con nosotros?</h2>
+        <p class="lead">Inscríbete y empieza a vivir experiencias únicas con nuestra comunidad.</p>
+        <a asp-controller="Miembros" asp-action="Inscripcion" class="btn btn-dorado btn-lg">Inscribirme</a>
+        <a asp-controller="Miembros" asp-action="Index" class="btn btn-borde-claro btn-lg">Ver riders inscritos</a>
+    </div>
+</section>
