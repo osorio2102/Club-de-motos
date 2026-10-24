@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ClubMotociclismo.Models;
 
+// hola  estoy haciendo un commit 2
 namespace ClubMotociclismo.Controllers;
 
 public class MiembrosController : Controller
