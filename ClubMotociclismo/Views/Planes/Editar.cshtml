@@ -1,0 +1,30 @@
+@model Plan
+@{
+    ViewData["Title"] = "Editar plan";
+}
+
+<section class="py-5 fondo-carbon text-white seccion-pagina">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <p class="etiqueta">Membresías</p>
+                <h2>Editar plan</h2>
+                <p class="lead">Si cambias la cuota, se recalcula la cuota de todos los riders que tienen este plan.</p>
+            </div>
+            <div class="col-lg-8">
+                <form asp-action="Editar" asp-route-id="@Model.Id" method="post" class="formulario" novalidate>
+                    <input type="hidden" asp-for="Id" />
+                    <partial name="_FormularioPlan" model="Model" />
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-vino">Guardar cambios</button>
+                        <a asp-action="Index" class="btn btn-borde-claro">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,23 @@
+@model Plan
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" placeholder="Ej: Premium" />
+        <span asp-validation-for="Nombre" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="CuotaMensual" class="form-label"></label>
+        <!-- El valor se escribe sin decimales para que el navegador lo acepte como número -->
+        <input asp-for="CuotaMensual" type="number" min="0" step="1000" class="form-control"
+               value="@Model.CuotaMensual.ToString("0", System.Globalization.CultureInfo.InvariantCulture)" />
+        <span asp-validation-for="CuotaMensual" class="text-dorado small"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Descripcion" class="form-label"></label>
+        <textarea asp-for="Descripcion" class="form-control" rows="3" placeholder="¿Qué incluye este plan?"></textarea>
+        <span asp-validation-for="Descripcion" class="text-dorado small"></span>
+    </div>
+</div>

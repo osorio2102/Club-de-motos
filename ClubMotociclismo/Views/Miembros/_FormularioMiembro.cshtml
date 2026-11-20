@@ -1,0 +1,73 @@
+@model Miembro
+@{
+    // Los planes vienen de la tabla Planes (SQL Server)
+    var planes = (List<Plan>)ViewBag.Planes;
+    var tiposMoto = (List<string>)ViewBag.TiposMoto;
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" placeholder="Ej: Carlos Ruiz" />
+        <span asp-validation-for="Nombre" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Correo" class="form-label"></label>
+        <input asp-for="Correo" class="form-control" placeholder="correo@ejemplo.com" />
+        <span asp-validation-for="Correo" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono" class="form-control" placeholder="Ej: 3001234567" />
+        <span asp-validation-for="Telefono" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Edad" class="form-label"></label>
+        <input asp-for="Edad" class="form-control" />
+        <span asp-validation-for="Edad" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="FechaIngreso" class="form-label"></label>
+        <input asp-for="FechaIngreso" class="form-control" />
+        <span asp-validation-for="FechaIngreso" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="TipoMoto" class="form-label"></label>
+        <select asp-for="TipoMoto" class="form-select">
+            <option value="">Selecciona</option>
+            @foreach (var tipo in tiposMoto)
+            {
+                <option value="@tipo">@tipo</option>
+            }
+        </select>
+        <span asp-validation-for="TipoMoto" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Cilindraje" class="form-label"></label>
+        <input asp-for="Cilindraje" class="form-control" placeholder="Ej: 250" />
+        <span asp-validation-for="Cilindraje" class="text-dorado small"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Placa" class="form-label"></label>
+        <input asp-for="Placa" class="form-control" placeholder="Ej: ABC12D (opcional)" />
+        <span asp-validation-for="Placa" class="text-dorado small"></span>
+    </div>
+
+    <!-- Lista desplegable con el registro relacionado: guarda el PlanId (clave foránea) -->
+    <div class="col-md-6">
+        <label asp-for="PlanId" class="form-label"></label>
+        <select asp-for="PlanId" class="form-select">
+            <option value="">Selecciona un plan</option>
+            @foreach (var plan in planes)
+            {
+                <option value="@plan.Id" data-precio="@plan.CuotaMensual.ToString("0", System.Globalization.CultureInfo.InvariantCulture)"
+                        selected="@(plan.Id == Model.PlanId)">
+                    @plan.Nombre — $@plan.CuotaMensual.ToString("N0")
+                </option>
+            }
+        </select>
+        <span asp-validation-for="PlanId" class="text-dorado small"></span>
+    </div>
+</div>

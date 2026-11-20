@@ -1,0 +1,40 @@
+@model Miembro
+@{
+    ViewData["Title"] = "Detalles del rider";
+}
+
+<section class="py-5 fondo-crema seccion-pagina">
+    <div class="container">
+        <div class="card tarjeta-confirmacion mx-auto">
+            <div class="card-header fondo-carbon text-white">
+                <h4 class="mb-0">@Model.Nombre</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><strong>Correo:</strong> @Model.Correo</li>
+                    <li class="list-group-item"><strong>Teléfono:</strong> @Model.Telefono</li>
+                    <li class="list-group-item"><strong>Edad:</strong> @Model.Edad años</li>
+                    <li class="list-group-item"><strong>Moto:</strong> @Model.TipoMoto de @Model.Cilindraje cc</li>
+                    <li class="list-group-item"><strong>Placa:</strong> @(string.IsNullOrEmpty(Model.Placa) ? "Sin registrar" : Model.Placa)</li>
+                    <li class="list-group-item"><strong>Fecha de ingreso:</strong> @Model.FechaIngreso?.ToString("dd/MM/yyyy")</li>
+                    <!-- Datos de la entidad relacionada (Plan) gracias a Include -->
+                    <li class="list-group-item">
+                        <strong>Plan:</strong>
+                        <a asp-controller="Planes" asp-action="Detalles" asp-route-id="@Model.PlanId">@Model.Plan?.Nombre</a>
+                        <small class="text-muted">— @Model.Plan?.Descripcion</small>
+                    </li>
+                    <li class="list-group-item item-destacado">
+                        <strong>Cuota mensual:</strong> $@Model.CuotaMensual.ToString("N0")
+                        @if (Model.Cilindraje > DatosClub.LimiteAltoCilindraje)
+                        {
+                            <small>(incluye recargo por alto cilindraje)</small>
+                        }
+                    </li>
+                </ul>
+                <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-dorado">Editar</a>
+                <a asp-action="Eliminar" asp-route-id="@Model.Id" class="btn btn-vino">Eliminar</a>
+                <a asp-action="Index" class="btn btn-borde-oscuro">Volver a la lista</a>
+            </div>
+        </div>
+    </div>
+</section>

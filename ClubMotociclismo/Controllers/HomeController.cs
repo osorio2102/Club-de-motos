@@ -1,21 +1,31 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ClubMotociclismo.Data;
 using ClubMotociclismo.Models;
 
 namespace ClubMotociclismo.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ClubContext _context;
+
+    public HomeController(ClubContext context)
+    {
+        _context = context;
+    }
+
     // GET: /Home/Index -> pagina principal con los eventos
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         // Solo mostramos los eventos que no han pasado, ordenados por fecha
-        var proximos = DatosClub.Eventos
+        var proximos = await _context.Eventos
             .Where(e => e.Fecha >= DateTime.Today)
             .OrderBy(e => e.Fecha)
-            .ToList();
+            .ToListAsync();
 
-        ViewBag.TotalMiembros = DatosClub.Miembros.Count;
+        ViewBag.TotalMiembros = await _context.Miembros.CountAsync();
+        ViewBag.TotalPlanes = await _context.Planes.CountAsync();
         return View(proximos);
     }
 

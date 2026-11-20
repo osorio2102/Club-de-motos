@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Inscripción exitosa";
 }
-// hola  estoy haciendo un commit
+
 <section class="py-5 fondo-crema seccion-pagina">
     <div class="container">
         <div class="card tarjeta-confirmacion mx-auto">
@@ -10,17 +10,17 @@
                 <h4 class="mb-0">¡Bienvenido al club, @Model.Nombre! 🏍️</h4>
             </div>
             <div class="card-body">
-                <p>Tu inscripción quedó registrada. Estos son tus datos:</p>
+                <p>Tu inscripción quedó guardada en la base de datos con el número <strong>#@Model.Id</strong>. Estos son tus datos:</p>
                 <ul class="list-group mb-3">
                     <li class="list-group-item"><strong>Correo:</strong> @Model.Correo</li>
                     <li class="list-group-item"><strong>Teléfono:</strong> @Model.Telefono</li>
                     <li class="list-group-item"><strong>Edad:</strong> @Model.Edad años</li>
                     <li class="list-group-item"><strong>Moto:</strong> @Model.TipoMoto de @Model.Cilindraje cc</li>
-                    <li class="list-group-item"><strong>Plan:</strong> @Model.Plan</li>
+                    <li class="list-group-item"><strong>Plan:</strong> @Model.Plan?.Nombre</li>
                     <li class="list-group-item"><strong>Fecha de ingreso:</strong> @Model.FechaIngreso?.ToString("dd/MM/yyyy")</li>
                     <li class="list-group-item item-destacado">
                         <strong>Cuota mensual:</strong> $@Model.CuotaMensual.ToString("N0")
-                        @if (Model.Cilindraje > 600)
+                        @if (Model.Cilindraje > DatosClub.LimiteAltoCilindraje)
                         {
                             <small>(incluye recargo por alto cilindraje)</small>
                         }

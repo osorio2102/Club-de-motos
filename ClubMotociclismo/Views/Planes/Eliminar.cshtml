@@ -1,0 +1,37 @@
+@model Plan
+@{
+    ViewData["Title"] = "Eliminar plan";
+}
+
+<section class="py-5 fondo-crema seccion-pagina">
+    <div class="container">
+        <div class="card tarjeta-confirmacion mx-auto">
+            <div class="card-header fondo-vino text-white">
+                <h4 class="mb-0">¿Eliminar el plan @Model.Nombre?</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><strong>Cuota mensual:</strong> $@Model.CuotaMensual.ToString("N0")</li>
+                    <li class="list-group-item"><strong>Descripción:</strong> @Model.Descripcion</li>
+                    <li class="list-group-item"><strong>Miembros con este plan:</strong> @Model.Miembros.Count</li>
+                </ul>
+
+                @if (Model.Miembros.Count > 0)
+                {
+                    <div class="alert alert-warning">
+                        Este plan tiene riders asociados. Por la clave foránea no se puede eliminar
+                        hasta que esos riders se cambien a otro plan.
+                    </div>
+                    <a asp-action="Detalles" asp-route-id="@Model.Id" class="btn btn-dorado">Ver sus riders</a>
+                }
+                else
+                {
+                    <form asp-action="Eliminar" asp-route-id="@Model.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-vino">Sí, eliminar</button>
+                    </form>
+                }
+                <a asp-action="Index" class="btn btn-borde-oscuro">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</section>

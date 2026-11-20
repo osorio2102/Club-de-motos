@@ -1,4 +1,6 @@
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+using ClubMotociclismo.Data;
 
 // Usamos el formato de Colombia para los precios (ej: 60.000)
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-CO");
@@ -8,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Registramos el DbContext con la cadena de conexión de SQL Server (appsettings.json)
+builder.Services.AddDbContext<ClubContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ClubConnection")));
 
 var app = builder.Build();
 

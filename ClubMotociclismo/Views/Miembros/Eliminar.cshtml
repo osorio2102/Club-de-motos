@@ -1,0 +1,27 @@
+@model Miembro
+@{
+    ViewData["Title"] = "Eliminar rider";
+}
+
+<section class="py-5 fondo-crema seccion-pagina">
+    <div class="container">
+        <div class="card tarjeta-confirmacion mx-auto">
+            <div class="card-header fondo-vino text-white">
+                <h4 class="mb-0">¿Eliminar a @Model.Nombre?</h4>
+            </div>
+            <div class="card-body">
+                <p>Esta acción borra el registro de la base de datos y no se puede deshacer.</p>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item"><strong>Correo:</strong> @Model.Correo</li>
+                    <li class="list-group-item"><strong>Moto:</strong> @Model.TipoMoto de @Model.Cilindraje cc</li>
+                    <li class="list-group-item"><strong>Plan:</strong> @Model.Plan?.Nombre</li>
+                    <li class="list-group-item"><strong>Cuota mensual:</strong> $@Model.CuotaMensual.ToString("N0")</li>
+                </ul>
+                <form asp-action="Eliminar" asp-route-id="@Model.Id" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-vino">Sí, eliminar</button>
+                </form>
+                <a asp-action="Index" class="btn btn-borde-oscuro">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</section>
